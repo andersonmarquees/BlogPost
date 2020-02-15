@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
 
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+
     def home
         @posts = Post.all.order("created_at DESC")
     end
@@ -18,15 +21,12 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find(params[:id])
     end
 
     def edit
-        @post = Post.find(params[:id])
     end
 
     def update
-        @post = Post.find(params[:id])
         if @post.update(post_params)
             redirect_to @post
         else
@@ -35,18 +35,22 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        @post = Post.find(params[:id])
         @post.destroy
         redirect_to root_url
     end
 
-    def search
-        #
+    def busca
+        @busca_por_titulo = params[:title]
+        @busca = Post.where "title like ?", "%#{@busca_por_titulo}%"
     end
 
     private
 
     def post_params
         params.require(:post).permit :title, :content
+    end
+
+    def set_post
+        @post = Post.find(params[:id])
     end
 end
