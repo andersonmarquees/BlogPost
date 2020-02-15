@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>BlogPost</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= nav_bar brand: "Blog Post", responsive: true, brand_link: root_url do %>
+      <%= menu_group do %>
+        <%= menu_item "Post", new_post_path %>
+        <%= menu_item "Busca em construção"%>
+      <% end %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
+
   </body>
 </html>

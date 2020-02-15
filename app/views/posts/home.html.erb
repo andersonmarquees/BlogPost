@@ -1,2 +1,11 @@
-<h1 class="title">Blog Post</h1>
+
+<% @posts.each do |post| %>
+    <div class="form-goup">
+        <h1 class="title"><%= post.title %></h1>
+        <%= post.content %>
+    </div>
+    <%= link_to "Editar", edit_post_path(post) %>
+    <%= link_to "Deletar", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
 
