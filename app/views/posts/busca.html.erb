@@ -1,7 +1,2 @@
 
-<% @busca.each do |b| %>
-    <div class="form-goup">
-        <h1><%= b.title %></h1>
-        <%= b.content %>
-    </div>
-<% end %>
+<%= render partial: "post", collection: @busca %>
