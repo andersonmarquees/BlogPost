@@ -1,8 +1,30 @@
 
-<div class="form-goup">
+<div class="form-group">
     <h1 class="title"><%= post.title %></h1>
     <%= post.content %>
 </div>
+
+<div>
+    <h2>Comments</h2>
+    <% post.comments.each do |comment| %>
+    <p>
+        <strong>Commenter:</strong>
+        <%= comment.comment %>
+    </p>
+<% end %>
+</div>
+
+<div class="form-group">
+    <%= form_with(model: [ post, post.comments.build ], local: true) do |f| %>
+        <div class="form-group">
+            <%= f.label :comment %>
+            <%= f.text_area :comment, class: "form-control"%>
+        </div>
+    <%= f.submit "Enviar", class: "btn btn-primary" %>
+<% end %>
+</div>
+
+
 <%= link_to "Editar", edit_post_path(post) %>
 <%= link_to "Deletar", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
 

@@ -3,29 +3,21 @@ class CommentsController < ApplicationController
     before_action :set_comment, only: [:edit, :update, :destroy]
 
     def index
-        @comments = Comment.all
+        #@comments = Comment.all
     end
 
     def new
-        @comment = Comment.new
+        #@comment = Comment.new
     end
 
     def create
-        @comment = Comment.new(comment_params)
-        if @comment.save
-            redirect_to @comment
-        else
-            render :new
-        end
+        @post = Post.find(params[:post_id])
+        @comment = @post.comments.create(comment_params)
+        redirect_to post_path(@post)
     end
 
-    def edit
-    end
-
-    def update
-    end
-
-    def destroy
+    def show
+        #@comment = Comment.find(params[:id])
     end
 
     private

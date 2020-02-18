@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
     def new
         @post = Post.new
+        @comment = Comment.all
     end
 
     def create
@@ -50,7 +51,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit :title, :content
+        params.require(:post).permit :title, :content, :comment_id
     end
 
     def set_post
